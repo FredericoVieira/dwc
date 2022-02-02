@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@900&family=Fjalla+One&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Fjalla One", Roboto, Helvetica Neue, sans-serif;
+}
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

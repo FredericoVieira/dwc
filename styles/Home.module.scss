@@ -1,0 +1,51 @@
+@import "./_variables.scss";
+
+.main {
+  background-color: $background-color;
+
+  .content {
+    height: 100vh;
+    display: flex;
+    padding: 0 5rem;
+
+    .background {
+      opacity: 0.3;
+    }
+
+    .welcome {
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex: 0;
+      flex-direction: column;
+
+      .title {
+        font-size: 3rem;
+        color: $primary-color;
+        text-transform: uppercase;
+        letter-spacing: 1rem;
+        line-height: 5rem;
+        margin-bottom: 1rem;
+        font-family: "Big Shoulders Inline Text";
+      }
+
+      .subtitle {
+        color: $secondary-color;
+        font-size: 1.4rem;
+        letter-spacing: 0.25rem;
+        line-height: 2rem;
+      }
+    }
+
+    .info {
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex: 1;
+
+      opacity: 0.3;
+      background: $black-color;
+      color: $secondary-color;
+    }
+  }
+}

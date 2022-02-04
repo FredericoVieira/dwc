@@ -20,7 +20,7 @@ Access localhost:3000
 
 ### Also available in:
 
-https://dwc...
+https://dwchecker.vercel.app/
 
 ### TODO
 

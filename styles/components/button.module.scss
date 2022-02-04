@@ -1,0 +1,50 @@
+@import "./styles/globals/_variables.scss";
+
+.button {
+  width: 100%;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 1px;
+}
+
+.primary {
+  background: $primary-color;
+  color: $white-color;
+  border-color: $primary-color;
+}
+
+.secondary {
+  background: $black-color;
+  color: $primary-color;
+  border-color: $black-color;
+}
+
+.small {
+  min-height: 42px;
+  font-size: 14px;
+}
+
+.medium {
+  min-height: 50px;
+  font-size: 16px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.primary:hover {
+  background-color: rgba($color: $black-color, $alpha: 0.3);
+}
+
+.secondary:hover {
+  border-color: $primary-color;
+  background-color: rgba($color: $black-color, $alpha: 0.3);
+}
+
+.icon {
+  margin-right: 10px;
+}

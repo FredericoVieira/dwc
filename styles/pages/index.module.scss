@@ -3,7 +3,7 @@
 .main {
   background-color: $background-color;
 
-  .content {
+  .wrapper {
     height: 100vh;
     display: flex;
     padding: 0 5rem;
@@ -45,14 +45,52 @@
       }
     }
 
-    .info {
+    .content {
       z-index: 1;
       height: 100%;
       display: flex;
       flex: 1;
-      margin-left: 2rem;
+      margin-left: 15rem;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+
+      .error {
+        color: $secondary-color;
+        font-size: 1.7rem;
+        letter-spacing: 0.25rem;
+        line-height: 2.5rem;
+        text-align: center;
+
+        .message {
+          font-size: 1.4rem;
+          margin-top: 0.7rem;
+        }
+      }
+
+      .info {
+        width: 100%;
+
+        .context {
+          margin: 5em 0;
+
+          .contextTitle {
+            background: $primary-color;
+            color: $black-color;
+            padding: 1rem;
+            font-size: 2rem;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+          }
+
+          .contextValue {
+            color: $secondary-color;
+            margin: 1.5em 1rem;
+            font-size: 1.4rem;
+            letter-spacing: 0.025rem;
+          }
+        }
+      }
     }
 
     @media only screen and (max-width: $desktop-breakpoint) {
@@ -71,11 +109,47 @@
           line-height: 2rem;
         }
       }
+
+      .content {
+        margin-left: 5rem;
+
+        .error {
+          font-size: 1.3rem;
+          letter-spacing: 0.15rem;
+          line-height: 1.8rem;
+
+          .message {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+          }
+        }
+
+        .info {
+          .context {
+            margin: 3em 0;
+
+            .contextTitle {
+              padding: 0.7rem;
+              font-size: 1.2rem;
+              letter-spacing: 0.3rem;
+              text-transform: uppercase;
+            }
+
+            .contextValue {
+              color: $secondary-color;
+              margin: 1.2em 0.7rem;
+              font-size: 1rem;
+              letter-spacing: 0.025rem;
+            }
+          }
+        }
+      }
     }
 
     @media only screen and (max-width: $tablet-breakpoint) {
       padding: 3rem;
       flex-direction: column;
+      flex: 0;
 
       .welcome {
         .search {
@@ -84,10 +158,9 @@
         }
       }
 
-      .info {
+      .content {
         margin-top: 2rem;
         margin-left: 0;
-        align-items: flex-start;
       }
     }
 
@@ -106,6 +179,37 @@
           font-size: 0.8rem;
           letter-spacing: 0.15rem;
           line-height: 2rem;
+        }
+      }
+
+      .content {
+        .error {
+          padding: 1.5rem;
+          font-size: 1rem;
+          letter-spacing: 0.15rem;
+          line-height: 1.5rem;
+
+          .message {
+            font-size: 0.8rem;
+            margin-top: 0.4rem;
+          }
+        }
+
+        .info {
+          .context {
+            margin: 2.5em 0;
+
+            .contextTitle {
+              font-size: 1rem;
+              letter-spacing: 0.3rem;
+              text-transform: uppercase;
+            }
+
+            .contextValue {
+              color: $secondary-color;
+              font-size: 0.8rem;
+            }
+          }
         }
       }
     }

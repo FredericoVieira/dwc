@@ -14,13 +14,24 @@ export default function Home() {
     useWeb3React();
   const [walletAddress, setWalletAddress] = useState("");
   const [balance, setBalance] = useState(null);
+  const [error, setError] = useState(null);
+
+  const throwError = (errorCode) => {
+    const errors = {
+      1: {
+        title: "Connection to Metamask failed!",
+        message: "Check if Metamask is installed/working properly.",
+      },
+    };
+    throw errors[errorCode];
+  };
 
   const connect = async () => {
     try {
-      await activate(Metamask);
+      await activate(Metamask, () => throwError(1));
       localStorage.setItem("isWalletConnected", true);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -30,8 +41,8 @@ export default function Home() {
       localStorage.setItem("isWalletConnected", false);
       setWalletAddress("");
       setBalance(null);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -40,10 +51,14 @@ export default function Home() {
     const balance = await library.eth.getBalance(address);
     const balanceFormatted = library.utils.fromWei(balance);
     setBalance(balanceFormatted);
-    console.log(library);
-    console.log(connector);
-    console.log(connector.getChainId().then(console.log));
+    // console.log(library);
+    // console.log(connector);
+    // console.log(connector.getChainId().then(console.log));
     // connector.handleChainChanged();
+    // window.ethereum.on("networkChanged", function (networkId) {
+    //   // Time to reload your interface with the new networkId
+    //   console.log("network changed");
+    // });
   };
 
   const getInfo = () => console.log("Get balance by address");
@@ -54,8 +69,8 @@ export default function Home() {
         try {
           await activate(Metamask);
           localStorage.setItem("isWalletConnected", true);
-        } catch (error) {
-          console.log(error);
+        } catch (e) {
+          setError(e);
         }
       }
     };
@@ -69,6 +84,34 @@ export default function Home() {
     }
   }, [account]);
 
+  const handleContent = () => {
+    // TODO: add loading
+    if (error)
+      return (
+        <div className={styles.error}>
+          {error.title}
+          <p className={styles.message}>{error.message}</p>
+        </div>
+      );
+    if (balance)
+      return (
+        <div className={styles.info}>
+          <div className={styles.context}>
+            <p className={styles.contextTitle}>Network:</p>
+            <p className={styles.contextValue}>Network name here</p>
+          </div>
+          <div className={styles.context}>
+            <p className={styles.contextTitle}>Balance:</p>
+            <p className={styles.contextValue}>EXX: {balance}</p>
+          </div>
+          <div className={styles.context}>
+            <p className={styles.contextTitle}>Transactions:</p>
+            <p className={styles.contextValue}>Comming soon...</p>
+          </div>
+        </div>
+      );
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -78,7 +121,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <section className={styles.content}>
+        <section className={styles.wrapper}>
           <div className={styles.welcome}>
             <h1 className={styles.title}>
               Wallet. <br />
@@ -109,10 +152,7 @@ export default function Home() {
               {active ? "Disconect" : "Connect with Metamask"}
             </Button>
           </div>
-          <div className={styles.info}>
-            <p>BALANCE:</p>
-            <span>{balance}</span>
-          </div>
+          <div className={styles.content}>{handleContent()}</div>
           <Image
             src={background}
             className={styles.background}

@@ -24,7 +24,9 @@ https://dwchecker.vercel.app/
 
 ### TODO
 
-- Tests
-- Balance
-- Transactions
+- Add loading when requesting infos
+- Add animation to show infos
+- Add network name on infos
+- Add initials on coin infos
+- Get balance by wallet address
 - Refresh when change network on Metamask

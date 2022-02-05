@@ -1,6 +1,6 @@
 import styles from "../styles/components/input.module.scss";
 
-const Input = ({ value, onChange, placeholder, style }) => {
+const Input = ({ value, onChange, placeholder, disabled, style }) => {
   const handleChange = ({ target }) => onChange(target.value);
 
   return (
@@ -10,6 +10,7 @@ const Input = ({ value, onChange, placeholder, style }) => {
       onChange={handleChange}
       placeholder={placeholder}
       className={styles.input}
+      disabled={disabled}
       style={style}
     />
   );

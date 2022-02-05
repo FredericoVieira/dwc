@@ -1,6 +1,6 @@
 # DWC - Decentralized Wallet Checker
 
-DWC is a webplatform to check for decentralized wallets, his balances and transactions.
+DWC is a webplatform to check for decentralized wallets, his balances and transactions on Ethereum blockchain system.
 
 ### Getting Started:
 
@@ -27,3 +27,4 @@ https://dwchecker.vercel.app/
 - Tests
 - Balance
 - Transactions
+- Refresh when change network on Metamask

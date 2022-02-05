@@ -7,6 +7,7 @@
     height: 100vh;
     display: flex;
     padding: 0 5rem;
+    position: relative;
 
     .background {
       opacity: 0.3;
@@ -39,7 +40,7 @@
 
       .search {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         margin: 2rem 0;
       }
     }
@@ -50,10 +51,63 @@
       display: flex;
       flex: 1;
       margin-left: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
 
-      opacity: 0.3;
-      background: $black-color;
-      color: $secondary-color;
+    @media only screen and (max-width: $desktop-breakpoint) {
+      padding: 0 3rem;
+
+      .welcome {
+        .title {
+          font-size: 2rem;
+          letter-spacing: 0.8rem;
+          line-height: 4rem;
+        }
+
+        .subtitle {
+          font-size: 1rem;
+          letter-spacing: 0.15rem;
+          line-height: 2rem;
+        }
+      }
+    }
+
+    @media only screen and (max-width: $tablet-breakpoint) {
+      padding: 3rem;
+      flex-direction: column;
+
+      .welcome {
+        .search {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+        }
+      }
+
+      .info {
+        margin-top: 2rem;
+        margin-left: 0;
+        align-items: flex-start;
+      }
+    }
+
+    @media only screen and (max-width: $mobile-breakpoint) {
+      padding: 3rem;
+      flex-direction: column;
+
+      .welcome {
+        .title {
+          font-size: 1.5rem;
+          letter-spacing: 0.8rem;
+          line-height: 3rem;
+        }
+
+        .subtitle {
+          font-size: 0.8rem;
+          letter-spacing: 0.15rem;
+          line-height: 2rem;
+        }
+      }
     }
   }
 }

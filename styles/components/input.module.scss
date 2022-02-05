@@ -10,4 +10,15 @@
   width: 100%;
   letter-spacing: 0.03rem;
   outline: none;
+  margin-right: 25px;
+
+  @media only screen and (max-width: $desktop-breakpoint) {
+    font-size: 0.75rem;
+    height: 35px;
+    margin-right: 10px;
+  }
+
+  @media only screen and (max-width: $tablet-breakpoint) {
+    max-width: 250px;
+  }
 }

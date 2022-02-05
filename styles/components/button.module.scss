@@ -25,11 +25,31 @@
 .small {
   min-height: 42px;
   font-size: 14px;
+  max-width: 150px;
+
+  @media only screen and (max-width: $desktop-breakpoint) {
+    min-height: 35px;
+    font-size: 12px;
+    max-width: 100px;
+  }
 }
 
 .medium {
   min-height: 50px;
   font-size: 16px;
+
+  @media only screen and (max-width: $desktop-breakpoint) {
+    min-height: 42px;
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: $tablet-breakpoint) {
+    max-width: 280px;
+  }
+
+  @media only screen and (max-width: $mobile-breakpoint) {
+    max-width: 100%;
+  }
 }
 
 .button:hover {
@@ -43,6 +63,16 @@
 .secondary:hover {
   border-color: $primary-color;
   background-color: rgba($color: $black-color, $alpha: 0.3);
+}
+
+.disabled {
+  color: $secondary-color;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+  border-color: $black-color;
+  background-color: $black-color;
 }
 
 .icon {

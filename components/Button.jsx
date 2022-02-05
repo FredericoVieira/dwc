@@ -7,12 +7,14 @@ const Button = ({
   onClick,
   variant = "primary",
   size = "medium",
-  maxWidth,
+  disabled,
 }) => (
   <button
-    className={`${styles.button} ${styles[variant]} ${styles[size]}`}
+    className={`${styles.button} ${styles[variant]} ${styles[size]} ${
+      disabled && styles.disabled
+    }`}
     onClick={onClick}
-    {...(maxWidth && { style: { maxWidth } })}
+    disabled={disabled}
   >
     {icon && (
       <span className={styles.icon}>

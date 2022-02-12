@@ -74,7 +74,7 @@
         .context {
           margin: 5em 0;
 
-          .contextTitle {
+          .title {
             background: $primary-color;
             color: $black-color;
             padding: 1rem;
@@ -83,7 +83,18 @@
             text-transform: uppercase;
           }
 
-          .contextValue {
+          .network {
+            display: flex;
+            align-items: center;
+            background-color: $primary-color;
+            justify-content: space-between;
+
+            .network-buttons {
+              display: flex;
+            }
+          }
+
+          .value {
             color: $secondary-color;
             margin: 1.5em 1rem;
             font-size: 1.4rem;
@@ -128,14 +139,14 @@
           .context {
             margin: 3em 0;
 
-            .contextTitle {
+            .title {
               padding: 0.7rem;
               font-size: 1.2rem;
               letter-spacing: 0.3rem;
               text-transform: uppercase;
             }
 
-            .contextValue {
+            .value {
               color: $secondary-color;
               margin: 1.2em 0.7rem;
               font-size: 1rem;
@@ -199,13 +210,13 @@
           .context {
             margin: 2.5em 0;
 
-            .contextTitle {
+            .title {
               font-size: 1rem;
               letter-spacing: 0.3rem;
               text-transform: uppercase;
             }
 
-            .contextValue {
+            .value {
               color: $secondary-color;
               font-size: 0.8rem;
             }

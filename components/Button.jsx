@@ -7,18 +7,25 @@ const Button = ({
   onClick,
   variant = "primary",
   size = "medium",
+  noText,
+  selected,
   disabled,
 }) => (
   <button
-    className={`${styles.button} ${styles[variant]} ${styles[size]} ${
-      disabled && styles.disabled
-    }`}
+    className={`${styles.button} ${styles[variant]} ${styles[size]}
+    ${noText && styles["no-text"]} ${noText && selected && styles["no-opacity"]}
+    ${disabled && styles.disabled}`}
     onClick={onClick}
     disabled={disabled}
   >
     {icon && (
-      <span className={styles.icon}>
-        <Image src={icon} alt="Icon" height={20} width={20} />
+      <span className={`${!noText ? styles.icon : styles["icon-flex"]}`}>
+        <Image
+          src={icon}
+          alt="Icon"
+          height={noText ? 25 : 20}
+          width={noText ? 25 : 20}
+        />
       </span>
     )}
     {children}

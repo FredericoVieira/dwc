@@ -1,30 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
+import Web3 from "web3";
 import Head from "next/head";
 import Image from "next/image";
-import Metamask from "../resources/connectors";
+import Metamask from "../utils/connectors";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { throwError, errors } from "../utils/error";
+import { formatBalance, networkMapper } from "../utils/formatter";
 import styles from "../styles/pages/index.module.scss";
 import background from "../public/background.jpg";
 import metamask from "../public/metamask.png";
 
-export default function Home() {
+export default function Index() {
   const { active, account, library, connector, activate, deactivate } =
     useWeb3React();
   const [walletAddress, setWalletAddress] = useState("");
-  const [balance, setBalance] = useState(null);
-  const [error, setError] = useState(null);
-
-  const throwError = (errorCode) => {
-    const errors = {
-      1: {
-        title: "Connection to Metamask failed!",
-        message: "Check if Metamask is installed/working properly.",
-      },
-    };
-    throw errors[errorCode];
+  const initialInfosState = {
+    networkId: null,
+    token: null,
+    balance: null,
+    context: null,
   };
+  const [infos, setInfos] = useState(initialInfosState);
+  const [error, setError] = useState(null);
 
   const connect = async () => {
     try {
@@ -40,28 +40,23 @@ export default function Home() {
       deactivate();
       localStorage.setItem("isWalletConnected", false);
       setWalletAddress("");
-      setBalance(null);
+      setInfos(initialInfosState);
     } catch (e) {
       setError(e);
     }
   };
 
-  const getBalance = async () => {
+  const getInfosFromMetamask = async () => {
     const address = account;
-    const balance = await library.eth.getBalance(address);
-    const balanceFormatted = library.utils.fromWei(balance);
-    setBalance(balanceFormatted);
-    // console.log(library);
-    // console.log(connector);
-    // console.log(connector.getChainId().then(console.log));
-    // connector.handleChainChanged();
-    // window.ethereum.on("networkChanged", function (networkId) {
-    //   // Time to reload your interface with the new networkId
-    //   console.log("network changed");
-    // });
-  };
+    const balance = formatBalance(
+      library,
+      await library.eth.getBalance(address)
+    );
 
-  const getInfo = () => console.log("Get balance by address");
+    const networkId = await library.eth.net.getId();
+    const { token } = networkMapper[networkId];
+    setInfos({ networkId, token, balance, context: "metamask" });
+  };
 
   useEffect(() => {
     const connectWalletOnPageLoad = async () => {
@@ -80,9 +75,25 @@ export default function Home() {
   useEffect(() => {
     if (account) {
       setWalletAddress(account);
-      getBalance();
+      getInfosFromMetamask();
     }
   }, [account]);
+
+  const getInfosFromWalletAddress = async (networkId = 1) => {
+    const { provider } = networkMapper[networkId];
+    const web3 = new Web3(provider);
+    try {
+      const balance = formatBalance(
+        web3,
+        await web3.eth.getBalance(walletAddress)
+      );
+      const { token } = networkMapper[networkId];
+      setInfos({ networkId, token, balance, context: "wallet-address" });
+    } catch (e) {
+      console.log(e);
+      setError(errors[2]);
+    }
+  };
 
   const handleContent = () => {
     // TODO: add loading
@@ -93,20 +104,41 @@ export default function Home() {
           <p className={styles.message}>{error.message}</p>
         </div>
       );
-    if (balance)
+    const { networkId, token, balance, context } = infos;
+    if (networkId && token && balance)
       return (
         <div className={styles.info}>
           <div className={styles.context}>
-            <p className={styles.contextTitle}>Network:</p>
-            <p className={styles.contextValue}>Network name here</p>
+            <div className={styles.network}>
+              <p className={styles.title}>Network: </p>
+              <div className={styles["network-buttons"]}>
+                {Object.keys(networkMapper).map((key) => {
+                  return (
+                    <Button
+                      key={key}
+                      icon={networkMapper[key].logo}
+                      noText
+                      onClick={() =>
+                        networkId != key && getInfosFromWalletAddress(key)
+                      }
+                      selected={networkId == key}
+                      disabled={context === "metamask"}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <p className={styles.value}>{networkMapper[networkId].network}</p>
           </div>
           <div className={styles.context}>
-            <p className={styles.contextTitle}>Balance:</p>
-            <p className={styles.contextValue}>EXX: {balance}</p>
+            <p className={styles.title}>Balance:</p>
+            <p className={styles.value}>
+              {token}: {balance}
+            </p>
           </div>
           <div className={styles.context}>
-            <p className={styles.contextTitle}>Transactions:</p>
-            <p className={styles.contextValue}>Comming soon...</p>
+            <p className={styles.title}>Transactions:</p>
+            <p className={styles.value}>Comming soon...</p>
           </div>
         </div>
       );
@@ -142,7 +174,7 @@ export default function Home() {
               <Button
                 variant="secondary"
                 size="small"
-                onClick={() => getInfo()}
+                onClick={() => getInfosFromWalletAddress()}
                 disabled={!!account}
               >
                 Get info

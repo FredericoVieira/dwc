@@ -78,3 +78,20 @@
 .icon {
   margin-right: 10px;
 }
+
+.icon-flex {
+  display: flex;
+}
+
+.no-text {
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  min-height: 0;
+  margin-right: 10px;
+  opacity: 0.5;
+}
+
+.no-opacity {
+  opacity: 1;
+}

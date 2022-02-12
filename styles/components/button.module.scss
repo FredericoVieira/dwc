@@ -77,10 +77,24 @@
 
 .icon {
   margin-right: 10px;
+  height: 25px;
+  width: 25px;
 }
 
 .icon-flex {
   display: flex;
+  height: 40px;
+  width: 40px;
+
+  @media only screen and (max-width: $desktop-breakpoint) {
+    height: 30px;
+    width: 30px;
+  }
+
+  @media only screen and (max-width: $mobile-breakpoint) {
+    height: 25px;
+    width: 25px;
+  }
 }
 
 .no-text {

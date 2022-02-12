@@ -20,12 +20,7 @@ const Button = ({
   >
     {icon && (
       <span className={`${!noText ? styles.icon : styles["icon-flex"]}`}>
-        <Image
-          src={icon}
-          alt="Icon"
-          height={noText ? 25 : 20}
-          width={noText ? 25 : 20}
-        />
+        <Image src={icon} alt="Icon" priority />
       </span>
     )}
     {children}

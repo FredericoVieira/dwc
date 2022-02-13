@@ -7,6 +7,7 @@ import Image from "next/image";
 import Metamask from "../utils/connectors";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import ReactLoading from "react-loading";
 import { throwError, errors } from "../utils/error";
 import { formatBalance, networkMapper } from "../utils/formatter";
 import styles from "../styles/pages/index.module.scss";
@@ -24,7 +25,10 @@ export default function Index() {
     context: null,
   };
   const [infos, setInfos] = useState(initialInfosState);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Metamask methods
 
   const connect = async () => {
     try {
@@ -47,6 +51,7 @@ export default function Index() {
   };
 
   const getInfosFromMetamask = async () => {
+    setIsLoading(true);
     const address = account;
     const balance = formatBalance(
       library,
@@ -56,6 +61,7 @@ export default function Index() {
     const networkId = await library.eth.net.getId();
     const { token } = networkMapper[networkId];
     setInfos({ networkId, token, balance, context: "metamask" });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -79,7 +85,10 @@ export default function Index() {
     }
   }, [account]);
 
+  // Wallet Address method
+
   const getInfosFromWalletAddress = async (networkId = 1) => {
+    setIsLoading(true);
     const { provider } = networkMapper[networkId];
     const web3 = new Web3(provider);
     try {
@@ -92,20 +101,23 @@ export default function Index() {
     } catch (e) {
       console.log(e);
       setError(errors[2]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleContent = () => {
-    // TODO: add loading
-    if (error)
+    const { networkId, token, balance, context } = infos;
+    if (isLoading)
+      return <ReactLoading type="cylon" color="#EA3031" width="20%" />;
+    else if (error)
       return (
         <div className={styles.error}>
           {error.title}
           <p className={styles.message}>{error.message}</p>
         </div>
       );
-    const { networkId, token, balance, context } = infos;
-    if (networkId && token && balance)
+    else if (networkId && token && balance)
       return (
         <div className={styles.info}>
           <div className={styles.context}>

@@ -28,6 +28,5 @@ Article related: ...
 
 ### TODO
 
-- Add loading when requesting infos
-- Add animation to show infos
 - Refresh when change network on Metamask
+- Content must be a new component

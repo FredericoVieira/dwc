@@ -70,6 +70,8 @@
 
       .info {
         width: 100%;
+        -webkit-animation: fadein 1s;
+        animation: fadein 1s;
 
         .context {
           margin: 5em 0;
@@ -224,5 +226,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

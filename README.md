@@ -29,4 +29,3 @@ Article related: ...
 ### TODO
 
 - Refresh when change network on Metamask
-- Content must be a new component

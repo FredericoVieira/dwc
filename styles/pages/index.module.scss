@@ -45,67 +45,6 @@
       }
     }
 
-    .content {
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex: 1;
-      margin-left: 15rem;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      .error {
-        color: $secondary-color;
-        font-size: 1.7rem;
-        letter-spacing: 0.25rem;
-        line-height: 2.5rem;
-        text-align: center;
-
-        .message {
-          font-size: 1.4rem;
-          margin-top: 0.7rem;
-        }
-      }
-
-      .info {
-        width: 100%;
-        -webkit-animation: fadein 1s;
-        animation: fadein 1s;
-
-        .context {
-          margin: 5em 0;
-
-          .title {
-            background: $primary-color;
-            color: $black-color;
-            padding: 1rem;
-            font-size: 2rem;
-            letter-spacing: 0.5rem;
-            text-transform: uppercase;
-          }
-
-          .network {
-            display: flex;
-            align-items: center;
-            background-color: $primary-color;
-            justify-content: space-between;
-
-            .network-buttons {
-              display: flex;
-            }
-          }
-
-          .value {
-            color: $secondary-color;
-            margin: 1.5em 1rem;
-            font-size: 1.4rem;
-            letter-spacing: 0.025rem;
-          }
-        }
-      }
-    }
-
     @media only screen and (max-width: $desktop-breakpoint) {
       padding: 0 3rem;
 
@@ -122,41 +61,6 @@
           line-height: 2rem;
         }
       }
-
-      .content {
-        margin-left: 5rem;
-
-        .error {
-          font-size: 1.3rem;
-          letter-spacing: 0.15rem;
-          line-height: 1.8rem;
-
-          .message {
-            font-size: 1rem;
-            margin-top: 0.5rem;
-          }
-        }
-
-        .info {
-          .context {
-            margin: 3em 0;
-
-            .title {
-              padding: 0.7rem;
-              font-size: 1.2rem;
-              letter-spacing: 0.3rem;
-              text-transform: uppercase;
-            }
-
-            .value {
-              color: $secondary-color;
-              margin: 1.2em 0.7rem;
-              font-size: 1rem;
-              letter-spacing: 0.025rem;
-            }
-          }
-        }
-      }
     }
 
     @media only screen and (max-width: $tablet-breakpoint) {
@@ -169,11 +73,6 @@
           margin-top: 2rem;
           margin-bottom: 2rem;
         }
-      }
-
-      .content {
-        margin-top: 2rem;
-        margin-left: 0;
       }
     }
 
@@ -194,46 +93,6 @@
           line-height: 2rem;
         }
       }
-
-      .content {
-        .error {
-          padding: 1.5rem;
-          font-size: 1rem;
-          letter-spacing: 0.15rem;
-          line-height: 1.5rem;
-
-          .message {
-            font-size: 0.8rem;
-            margin-top: 0.4rem;
-          }
-        }
-
-        .info {
-          .context {
-            margin: 2.5em 0;
-
-            .title {
-              font-size: 1rem;
-              letter-spacing: 0.3rem;
-              text-transform: uppercase;
-            }
-
-            .value {
-              color: $secondary-color;
-              font-size: 0.8rem;
-            }
-          }
-        }
-      }
     }
-  }
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

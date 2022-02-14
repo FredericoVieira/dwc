@@ -24,8 +24,4 @@ https://dwchecker.vercel.app/
 
 ###
 
-Article related: ...
-
-### TODO
-
-- Refresh when change network on Metamask
+Code development explain in this article: ARTICLE_LINK_HERE

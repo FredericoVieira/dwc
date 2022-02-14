@@ -51,6 +51,7 @@ export default function Index() {
   };
 
   const getInfosFromMetamask = async () => {
+    setError(null);
     setIsLoading(true);
     const address = account;
     const balance = formatBalance(
@@ -87,13 +88,12 @@ export default function Index() {
 
   useEffect(() => {
     window?.ethereum.on("networkChanged", function (networkId) {
-      // Time to reload your interface with the new networkId
-      console.log("infos.net", infos.networkId);
-      console.log("networkId", networkId);
+      if (infos.networkId != networkId) getInfosFromMetamask();
     });
   });
 
   const getInfosFromWalletAddress = async (networkId = 1) => {
+    setError(null);
     setIsLoading(true);
     const { provider } = networkMapper[networkId];
     const web3 = new Web3(provider);

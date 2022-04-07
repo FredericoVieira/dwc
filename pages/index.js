@@ -87,7 +87,7 @@ export default function Index() {
   }, [account]);
 
   useEffect(() => {
-    window?.ethereum.on("networkChanged", function (networkId) {
+    window?.ethereum?.on("networkChanged", function (networkId) {
       if (infos.networkId != networkId) getInfosFromMetamask();
     });
   });

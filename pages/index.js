@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
+import { v4 as uuidv4 } from "uuid";
 import Web3 from "web3";
+import renderSnippet from "../utils/snippet";
 import Head from "next/head";
 import Image from "next/image";
 import Metamask from "../utils/connectors";
@@ -92,6 +94,11 @@ export default function Index() {
     });
   });
 
+  useEffect(() => {
+    analytics.identify(uuidv4());
+    console.log("aaaaa");
+  }, []);
+
   const getInfosFromWalletAddress = async (networkId = 1) => {
     setError(null);
     setIsLoading(true);
@@ -118,6 +125,10 @@ export default function Index() {
         <title>Decentralized Wallet Checker | DWC</title>
         <meta name="description" content="Decentralized Wallet Checker" />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          id="segment-script"
+          dangerouslySetInnerHTML={{ __html: renderSnippet() }}
+        />
       </Head>
 
       <main className={styles.main}>

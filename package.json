@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@segment/snippet": "^4.15.3",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "next": "12.0.4",
@@ -15,6 +16,7 @@
     "react-dom": "17.0.2",
     "react-loading": "^2.0.3",
     "sass": "^1.43.5",
+    "uuid": "^8.3.2",
     "web3": "^1.7.0"
   },
   "devDependencies": {

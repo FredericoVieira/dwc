@@ -1,4 +1,3 @@
-import getConfig from "next/config";
 import eth from "../public/eth.png";
 import bnb from "../public/bnb.png";
 import pol from "../public/pol.png";
@@ -6,8 +5,8 @@ import pol from "../public/pol.png";
 const formatBalance = (providerInstance, balance) =>
   providerInstance.utils.fromWei(balance);
 
-const { publicRuntimeConfig } = getConfig();
-const networkProviderBaseUrl = `https://speedy-nodes-nyc.moralis.io/${publicRuntimeConfig.moralisAccountToken}`;
+const moralisAccountToken = process.env.NEXT_PUBLIC_MORALIS_ACCOUNT_TOKEN;
+const networkProviderBaseUrl = `https://speedy-nodes-nyc.moralis.io/${moralisAccountToken}`;
 
 const networkMapper = {
   1: {
